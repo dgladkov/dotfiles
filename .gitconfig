@@ -1,0 +1,33 @@
+[user]
+	email = dmitry.gladkov@gmail.com
+	name = Dmitry Gladkov
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	safecrlf = true
+	whitespace = trailing-space,space-before-tab,tab-in-indent
+[merge]
+	tool = vimdiff
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+        dfch = diff --check
+	dfc = diff --cached
+        dfcch = diff --cached --check
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	logp = log --date=short --pretty=format:'%h %ad | %s%d [%an]'
+	unstage = reset HEAD
+	type = cat-file -t
+	dump = cat-file -p
+[help]
+	autocorrect = -1
+[color]
+	ui = true
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
