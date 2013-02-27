@@ -1,0 +1,21 @@
+# folder view configuration files
+.DS_Store
+Desktop.ini
+
+# thumbnail cache files
+._*
+Thumbs.db
+
+# files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# virtualenv
+.venv
+.env
+
+# vim
+*.swp
+
+# sqlite
+*.sqlite3
