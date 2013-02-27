@@ -24,6 +24,7 @@
 	unstage = reset HEAD
 	type = cat-file -t
 	dump = cat-file -p
+        undopush = push -f origin HEAD^:master
 [help]
 	autocorrect = -1
 [color]
