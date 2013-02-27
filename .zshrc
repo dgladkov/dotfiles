@@ -46,11 +46,6 @@ zstyle ':vcs_info:*' formats ' %b'
 
 PS1="%F{cyan}%n@%m%f %F{yellow}%~%f%(1v.%F{green}%1v%f.) %F{yellow}$%f "
 
-# completion of known hosts
-local _myhosts
-_myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-zstyle ':completion:*' hosts $_myhosts
-
 # useful keybindings
 bindkey "^W" vi-backward-kill-word
 case `uname -s` in
@@ -105,27 +100,26 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
 
+# useful functions
+pygl () { pygmentize $1 | less -r }
 
-pygless () { pygmentize $1 | less -r }
-
-has_virtualenv() {
-    if [ -e .venv ]; then
-        workon `cat .venv`
-    fi
+cd () {
+    has_virtualenv() {
+        if [ -e .venv ]; then
+            workon `cat .venv`
+        fi
+    }
+    builtin cd "$@" && has_virtualenv
 }
-venv_cd () {
-    cd "$@" && has_virtualenv
-}
 
-start_devmailserver () {
+devmailserver () {
     local HOST=${1:-"localhost:20025"} 
     echo "Starting development mail server at $HOST"
     python -m smtpd -n -c DebuggingServer $HOST
 }
 
-# useful small aliases
+# useful aliases
 alias sudo="sudo " # to make aliases work with sudo
-alias cd="venv_cd"
 alias json="python -m json.tool"
 alias updick='/usr/bin/uptime | perl -ne "/(\d+) d/;print 8,q(=)x\$1,\"D\n\""'
 alias wgetr='wget --random-wait -r -p -e robots=off -U "Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"'
@@ -133,4 +127,6 @@ alias shutdownwin="net rpc shutdown -I ipAddressOfWindowsPC -U username%password
 alias 'ps?'='ps ax | grep '
 alias coolwatch='watch -t -n1 "date +%T|figlet -f big"'
 alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v information_schema); do mysqldump5 $db | bzip2 > "$db.sql.bz2"; done'
-alias devmailserver="start_devmailserver"
+
+# trick to force venv_cd to run in the new tab
+cd .
