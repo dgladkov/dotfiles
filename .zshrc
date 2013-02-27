@@ -107,6 +107,8 @@ cd () {
     has_virtualenv() {
         if [ -e .venv ]; then
             workon `cat .venv`
+        elif [ -e .env/bin/activate ]; then
+            source .env/bin/activate
         fi
     }
     builtin cd "$@" && has_virtualenv
