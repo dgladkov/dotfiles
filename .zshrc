@@ -78,16 +78,13 @@ source virtualenvwrapper.sh
 # ls coloring
 export LSCOLORS=dxfxcxdxbxegedabagacad
 
-case `uname -s` in
-  Darwin)
-    alias ls='ls -G'
-    alias grep='grep -G'
-    ;;
-  Linux)
+if ls --color > /dev/null 2>&1; then # GNU coreutils
     alias ls='ls --color=auto'
     alias grep="grep --color=auto"
-    ;;
-esac
+else # BSD coreutils
+    alias ls='ls -G'
+    alias grep='grep -G'
+fi
 
 # completing process IDs with menu selection
 zstyle ':completion:*:*:kill:*' menu yes select
