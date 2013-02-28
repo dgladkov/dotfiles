@@ -29,6 +29,7 @@ setopt extendedglob
 #history
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
+setopt share_history
 export HISTSIZE=2000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
