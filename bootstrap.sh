@@ -6,21 +6,21 @@ function doIt() {
 	for i in $files; do
 		if [[ $i == \.* ]]; then
 			rm -rf "$HOME/$i"
-			ln -s "$PWD/$i" "$HOME/$i"
-		fi
+    		ln -s "$PWD/$i" "$HOME/$i"
+    	fi
 	done
 
 	local zsh=`grep -m 1 zsh /etc/shells`
 	if [[ "$SHELL" = *zsh ]]; then
-		#`exec zsh`
+		exec "$zsh"
 	else
 		if [[ -n $zsh ]]; then
 			read -n 1 -p "Change your default shell to zsh? (y/n) "
 			echo
 			chsh -s /bin/sh
-			#`exec $zsh`
+			exec "$zsh"
 		else
-			echo "Please install zsh and make it default shell"
+			echo "Please install zsh package using your package manager"
 		fi
 	fi
 }
