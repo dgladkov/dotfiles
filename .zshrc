@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+stty -ixon -ixoff
+
 # my favorite apps to use
 export EDITOR='vim'
 case `uname -s` in
@@ -51,6 +53,11 @@ PS1="%F{cyan}%n@%m%f %F{yellow}%~%f%(1v.%F{green}%1v%f.) %F{yellow}$%f "
 
 # useful keybindings
 bindkey "^W" vi-backward-kill-word
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+bindkey '^J' accept-line
 
 # list all possible keycodes for different terms
 bindkey "\e[1;5A" up-history
@@ -72,12 +79,6 @@ bindkey ";5A" up-history
 bindkey ";5B" down-history
 bindkey ";5C" vi-forward-word
 bindkey ";5D" vi-backward-word
-
-
-bindkey "^A" vi-beginning-of-line
-bindkey "^E" vi-end-of-line
-bindkey '^R' history-incremental-search-backward
-bindkey '^J' accept-line
 
 # show matching groups
 zstyle ':completion:*:descriptions' format '%U%d%u'
