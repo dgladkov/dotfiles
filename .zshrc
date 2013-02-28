@@ -53,14 +53,26 @@ PS1="%F{cyan}%n@%m%f %F{yellow}%~%f%(1v.%F{green}%1v%f.) %F{yellow}$%f "
 bindkey "^W" vi-backward-kill-word
 
 # list all possible keycodes for different terms
+bindkey "\e[1;5A" up-history
+bindkey "\e[1;5B" down-history
 bindkey "\e[1;5C" vi-forward-word
 bindkey "\e[1;5D" vi-backward-word
+
+bindkey "\e[5A" up-history
+bindkey "\e[5B" down-history
 bindkey "\e[5C" vi-forward-word
 bindkey "\e[5D" vi-backward-word
+
+bindkey "\e\e[5A" up-history
+bindkey "\e\e[5B" down-history
 bindkey "\e\e[C" vi-forward-word
 bindkey "\e\e[D" vi-backward-word
+
+bindkey ";5A" up-history
+bindkey ";5B" down-history
 bindkey ";5C" vi-forward-word
 bindkey ";5D" vi-backward-word
+
 
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
