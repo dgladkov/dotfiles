@@ -1,13 +1,16 @@
 #!/bin/bash
 
 function doIt() {
-	local files=`git ls-tree --name-only HEAD`
+	local files=`git ls-files`
 
 	for i in $files; do
 		if [[ $i == \.* ]]; then
+			# this is a hack to make bootstrap play nice with existing dirs
 			rm -rf "$HOME/$i"
-    		ln -s "$PWD/$i" "$HOME/$i"
-    	fi
+			mkdir -p "$HOME/$i"
+			rm -rf "$HOME/$i"
+			ln -s "$PWD/$i" "$HOME/$i"
+		fi
 	done
 
 	local zsh=`grep -m 1 zsh /etc/shells`
