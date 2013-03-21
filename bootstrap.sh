@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function doIt() {
+	local IFS=$(echo -en "\n\b")
 	local files=`git ls-files`
 
 	for i in $files; do
