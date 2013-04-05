@@ -120,7 +120,10 @@ pygl () { pygmentize $1 | less -r }
 cd () {
     has_virtualenv() {
         if [ -e .venv ]; then
-            workon `cat .venv`
+          local ENV_NAME=`cat .venv`
+          if [ "`basename \"$VIRTUAL_ENV\"`" != "$ENV_NAME" ]; then
+            workon "$ENV_NAME"
+          fi
         elif [ -e .env/bin/activate ]; then
             source .env/bin/activate
         fi
