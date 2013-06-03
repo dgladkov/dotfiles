@@ -18,8 +18,8 @@
         dfch = diff --check
 	dfc = diff --cached
         dfcch = diff --cached --check
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	lol = log --graph --decorate --oneline --abbrev-commit
+	lola = log --graph --decorate --oneline --abbrev-commit --all
 	logp = log --date=short --pretty=format:'%h %ad | %s%d [%an]'
 	unstage = reset HEAD
 	type = cat-file -t
