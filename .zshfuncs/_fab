@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0064)https://raw.github.com/zsh-users/zsh-completions/master/src/_fab -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css"></style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">#compdef fab
+#compdef fab
 # ------------------------------------------------------------------------------
 # Description
 # -----------
@@ -22,7 +20,7 @@ local curcontext=$curcontext state line
 declare -A opt_args
 
 declare target_list
-target_list=(`fab --shortlist 2&gt;/dev/null`)
+target_list=(`fab --shortlist 2>/dev/null`)
 
 _targets() {
     _describe -t commands "fabric targets" target_list
@@ -39,10 +37,10 @@ output_levels=(
 )
 
 _arguments -w -S -C \
-  '(-)'{-h,--help}'[show this help message and exit]: :-&gt;noargs' \
-  '(-)'{-V,--version}'[show program''s version number and exit]: :-&gt;noargs' \
-  '(-)--list[print list of possible commands and exit]: :-&gt;noargs' \
-  '(-)--shortlist[print non-verbose list of possible commands and exit]: :-&gt;noargs' \
+  '(-)'{-h,--help}'[show this help message and exit]: :->noargs' \
+  '(-)'{-V,--version}'[show program''s version number and exit]: :->noargs' \
+  '(-)--list[print list of possible commands and exit]: :->noargs' \
+  '(-)--shortlist[print non-verbose list of possible commands and exit]: :->noargs' \
   '(--reject-unknown-hosts)--reject-unknown-hosts[reject unknown hosts]' \
   '(--no-pty)--no-pty[do not use pseudo-terminal in run/sudo]' \
   "(-d+ --display=-)"{-d+,--display=-}"[print detailed info about a given command]: :_targets" \
@@ -59,9 +57,9 @@ _arguments -w -S -C \
   "(-f+ --fabfile=)"{-f+,--fabfile=}"[Python module file to import]: :_files -g *.py" \
   '(-c+ --config=-)'{-c+,--config=-}'[specify location of config file to use]: :_files' \
   '(-s+ --shell=-)'{-s+,--shell=-}'[specify a new shell, defaults to ''/bin/bash -l -c'']: :' \
-  '(--hide=-)--hide=-[comma-separated list of output levels to hide]: :-&gt;levels' \
-  '(--show=-)--show=-[comma-separated list of output levels to show]: :-&gt;levels' \
-  '*::: :-&gt;subcmds' &amp;&amp; return 0
+  '(--hide=-)--hide=-[comma-separated list of output levels to hide]: :->levels' \
+  '(--show=-)--show=-[comma-separated list of output levels to show]: :->levels' \
+  '*::: :->subcmds' && return 0
 
 if [[ CURRENT -ge 1 ]]; then
     case $state in
@@ -83,4 +81,3 @@ fi
 # sh-basic-offset: 2
 # End:
 # vim: ft=zsh sw=2 ts=2 et
-</pre></body></html>
