@@ -149,3 +149,5 @@ alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v informati
 
 # trick to force venv_cd to run in the new tab
 cd .
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -10,3 +10,4 @@ for f in .zshfuncs/*; do
 done
 
 unset filename
+unset EXCLUDES
