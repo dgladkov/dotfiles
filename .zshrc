@@ -149,8 +149,5 @@ alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v informati
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-# enable syntax highlighting
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # trick to force venv_cd to run in the new tab
 cd .
