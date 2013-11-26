@@ -1,4 +1,3 @@
-#hide toolbar
 set guioptions-=T
 
 colorscheme railscat
