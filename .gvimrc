@@ -1,5 +1,5 @@
 set guioptions-=T
 
-colorscheme railscat
-set guifont=Inconsolata\ 12
-set linespace=2
+set guifont=DejaVu\ Sans\ Mono\ 10
+set linespace=3
+set lines=100 columns=150

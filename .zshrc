@@ -90,7 +90,8 @@ alias -s html=$BROWSER
 # virtualenv
 export VIRTUALENV_USE_DISTRIBUTE=true
 export WORKON_HOME=$HOME/.virtualenvs
-source virtualenvwrapper.sh
+export PROJECT_HOME=$HOME/Projects
+source /usr/local/bin/virtualenvwrapper.sh
 
 # ls coloring
 export LSCOLORS=dxfxcxdxbxegedabagacad
