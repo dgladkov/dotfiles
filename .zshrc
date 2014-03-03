@@ -91,6 +91,8 @@ alias -s html=$BROWSER
 export VIRTUALENV_USE_DISTRIBUTE=true
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
+export DJANGO_DEFAULT_PROJECT_TEMPLATE=https://github.com/caktus/django-project-template/zipball/master
+export DJANGO_DEFAULT_PROJECT_TEMPLATE_EXTENSIONS=py,rst,md,mdown,markdown
 source /usr/local/bin/virtualenvwrapper.sh
 
 # ls coloring
