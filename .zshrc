@@ -150,7 +150,7 @@ alias 'ps?'='ps ax | grep '
 alias coolwatch='watch -t -n1 "date +%T|figlet -f big"'
 alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v information_schema); do mysqldump5 $db | bzip2 > "$db.sql.bz2"; done'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/.rvm/bin:$HOME/adt/sdk/platform-tools # Add RVM to PATH for scripting
 
 # trick to force venv_cd to run in the new tab
 cd .
