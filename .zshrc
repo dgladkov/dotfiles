@@ -154,3 +154,8 @@ PATH=$PATH:$HOME/.rvm/bin:$HOME/adt/sdk/platform-tools # Add RVM to PATH for scr
 
 # trick to force venv_cd to run in the new tab
 cd .
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
