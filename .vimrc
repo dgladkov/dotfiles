@@ -25,9 +25,11 @@ else
 endif
 
 if s:molokai_original == 1
-   hi LineNr guifg=#BCBCBC guibg=#272822
+   hi LineNr guifg=#A6E22E guibg=#272822
+   hi SignColumn guifg=#A6E22E guibg=#278222
 else
-   hi LineNr guifg=#465457 guibg=#1B1D1E
+   hi LineNr guifg=#A6E22E guibg=#1B1D1E
+   hi SignColumn guifg=#A6E22E guibg=#1B1D1E
 endif
 
 " == tab navigation settings ===================================
