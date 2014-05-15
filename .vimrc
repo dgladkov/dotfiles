@@ -33,7 +33,9 @@ else
 endif
 
 " == tab navigation settings ===================================
-noremap <C-t>     :tabnew<CR>
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-Tab> :bnext<CR>
+nnoremap <C-S-Tab> :bprevious<CR>
 
 " == NERDTree settings =========================================
 let g:NERDTreeShowHidden = 1
@@ -50,5 +52,4 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 
 " == vim-airline settings ======================================
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts = 1
