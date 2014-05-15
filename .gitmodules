@@ -7,3 +7,9 @@
 [submodule ".vim/bundle/vim-fugitive"]
 	path = .vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/csv.vim"]
+	path = .vim/bundle/csv.vim
+	url = git://github.com/chrisbra/csv.vim.git
+[submodule ".vim/bundle/vim-flake8"]
+	path = .vim/bundle/vim-flake8
+	url = git://github.com/nvie/vim-flake8.git
