@@ -19,12 +19,12 @@
 [submodule ".vim/bundle/vim-virtualenv"]
 	path = .vim/bundle/vim-virtualenv
 	url = git://github.com/jmcantrell/vim-virtualenv.git
-[submodule ".vim/bundle/molokai"]
-	path = .vim/bundle/molokai
-	url = git://github.com/tomasr/molokai.git
 [submodule ".vim/bundle/unite.vim"]
 	path = .vim/bundle/unite.vim
 	url = git://github.com/Shougo/unite.vim.git
 [submodule ".vim/bundle/vimproc.vim"]
 	path = .vim/bundle/vimproc.vim
 	url = git://github.com/Shougo/vimproc.vim.git
+[submodule ".vim/bundle/molokai"]
+	path = .vim/bundle/molokai
+	url = git://github.com/dgladkov/molokai.git

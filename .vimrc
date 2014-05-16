@@ -15,22 +15,8 @@ set autoindent
 " always show status line
 set laststatus=2
 
-" == color scheme with custom line number colors ===============
+" == color scheme ==============================================
 colorscheme molokai
-
-if exists("g:molokai_original")
-    let s:molokai_original = g:molokai_original
-else
-    let s:molokai_original = 0
-endif
-
-if s:molokai_original == 1
-   hi LineNr guifg=#A6E22E guibg=#272822
-   hi SignColumn guifg=#A6E22E guibg=#278222
-else
-   hi LineNr guifg=#A6E22E guibg=#1B1D1E
-   hi SignColumn guifg=#A6E22E guibg=#1B1D1E
-endif
 
 " == tab navigation settings ===================================
 nnoremap <C-t> :tabnew<CR>
