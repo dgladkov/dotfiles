@@ -27,6 +27,7 @@ function doIt() {
 			echo "Please install zsh package using your package manager"
 		fi
 	fi
+	make -C ./.vim/bundle/vimproc.vim
 }
 
 if [ "$1" = "--force" -o "$1" = "-f" ]; then
