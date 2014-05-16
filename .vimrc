@@ -53,3 +53,9 @@ nmap <silent> <C-D> :NERDTreeToggle<CR>
 " == vim-airline settings ======================================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+" == unite settings / bling ====================================
+nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <space>y :Unite history/yank<cr>
