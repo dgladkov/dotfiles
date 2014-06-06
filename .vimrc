@@ -45,3 +45,8 @@ nnoremap <C-p> :Unite file_rec/async<cr>
 nnoremap <space>/ :Unite grep:.<cr>
 let g:unite_source_history_yank_enable = 1
 nnoremap <space>y :Unite history/yank<cr>
+
+" == syntastic =================================================
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args='--ignore=E501'
+
