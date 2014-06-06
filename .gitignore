@@ -19,3 +19,6 @@ Thumbs.db
 
 # sqlite
 *.sqlite3
+
+# fonts cache
+.fonts/fonts.*
