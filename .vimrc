@@ -58,3 +58,9 @@ let g:syntastic_mode_map = { 'mode': 'active',
     \ 'active_filetypes': [],
     \ 'passive_filetypes': ['html']
 \}
+
+" == markdown settings =========================================
+let g:vim_markdown_folding_disabled=1
+
+" == gundo settings ============================================
+nnoremap <F5> :GundoToggle<CR>
