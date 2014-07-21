@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+#disable control flow (scroll lock) signals
 stty -ixon -ixoff
 
 # my favorite apps to use
@@ -107,11 +108,11 @@ fi
 export LSCOLORS=dxfxcxdxbxegedabagacad
 
 if ls --color > /dev/null 2>&1; then # GNU coreutils
-    alias ls='ls --color=auto'
-    alias grep="grep --color=auto"
+  alias ls='ls --color=auto'
+  alias grep="grep --color=auto"
 else # BSD coreutils
-    alias ls='ls -G'
-    alias grep='grep -G'
+  alias ls='ls -G'
+  alias grep='grep -G'
 fi
 
 # completing process IDs with menu selection
@@ -143,9 +144,9 @@ cd () {
 }
 
 devmailserver () {
-    local HOST=${1:-"localhost:20025"} 
-    echo "Starting development mail server at $HOST"
-    python -m smtpd -n -c DebuggingServer $HOST
+  local HOST=${1:-"localhost:20025"}
+  echo "Starting development mail server at $HOST"
+  python -m smtpd -n -c DebuggingServer $HOST
 }
 
 # useful aliases
