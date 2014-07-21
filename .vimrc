@@ -1,9 +1,31 @@
-execute pathogen#infect()
+set nocompatible
+filetype off
+
+" == Vundle config =============================================
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'chrisbra/csv.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/syntastic'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-repeat'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()
+filetype plugin indent on
 
 " == general settings ==========================================
-set nocompatible
 syntax on
-filetype plugin indent on
 set hidden
 set number
 " close buffer without closing window split
@@ -31,7 +53,7 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 autocmd BufEnter * NERDTreeMirror
 autocmd VimEnter * wincmd w
 
-" close vim if only NERDTree buffer is left 
+" close vim if only NERDTree buffer is left
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 nmap <silent> <C-D> :NERDTreeToggle<CR>
