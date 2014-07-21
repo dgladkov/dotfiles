@@ -46,7 +46,7 @@ fi
 
 if [ "$icon_name" = "" ]; then
     if [ "$display_volume" = "0" ]; then
-        icon_name="audio-volume-muted-blocking-panel"
+        icon_name="audio-volume-muted-panel"
     else
         if [ "$display_volume" -lt "33" ]; then
             icon_name="audio-volume-low-panel"
