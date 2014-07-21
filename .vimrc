@@ -20,6 +20,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'elzr/vim-json'
 
 call vundle#end()
 filetype plugin indent on
