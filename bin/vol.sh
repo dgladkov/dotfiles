@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# XF86AudioMute XF86AudioLowerVolume XF86AudioRaiseVolume
 usage="usage: $0 -c {up|down|mute} [-i increment] [-m mixer]"
 command=
 increment=10%
