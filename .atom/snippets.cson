@@ -1,0 +1,7 @@
+'.py':
+  'Python ipdb debugger':
+    'prefix': 'ipdb'
+    'body': 'import ipdb; ipdb.set_trace()'
+  'Python pdb debugger':
+    'prefix': 'pdb'
+    'body': 'import pdb; pdb.set_trace()'
