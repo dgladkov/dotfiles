@@ -1,7 +1,7 @@
 set nocompatible
-filetype off
 
 " == Vundle config =============================================
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -27,8 +27,12 @@ filetype plugin indent on
 
 " == general settings ==========================================
 syntax on
+" switch between buffers without saving
 set hidden
+" show line numbers
 set number
+" ingelligent case (in)sensitive search
+set smartcase
 " close buffer without closing window split
 noremap <Leader>c :bp<bar>bd #<CR>
 
