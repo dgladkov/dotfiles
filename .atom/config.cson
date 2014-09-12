@@ -7,6 +7,10 @@
 'editor':
   'fontFamily': 'DejaVu Sans Mono'
   'fontSize': 14
+  'showInvisibles': true
+  'tabLength': 4
+  'showIndentGuide': true
+  'invisibles': {}
 'core':
   'disabledPackages': [
     'welcome'
@@ -14,4 +18,9 @@
   'themes': [
     'atom-dark-ui'
     'monokai'
+  ]
+  'projectHome': '/home/dgl/Projects'
+'linter-flake8':
+  'ignoreErrorCodes': [
+    'E501'
   ]
