@@ -98,7 +98,7 @@ export DJANGO_DEFAULT_PROJECT_TEMPLATE_EXTENSIONS=py,rst,md,mdown,markdown
 # activate virtualenwrapper if installed
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]
 then
-	source /usr/local/bin/virtualenvwrapper.sh
+  source /usr/local/bin/virtualenvwrapper.sh
 elif [ -f "/usr/bin/virtualenvwrapper.sh" ]
 then
   source /usr/bin/virtualenvwrapper.sh
@@ -160,6 +160,13 @@ alias coolwatch='watch -t -n1 "date +%T|figlet -f big"'
 alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v information_schema); do mysqldump5 $db | bzip2 > "$db.sql.bz2"; done'
 
 PATH=$PATH:$HOME/.local/bin:$HOME/.rvm/bin:$HOME/adt/sdk/platform-tools # Add RVM to PATH for scripting
+
+if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]
+then
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
 
 # trick to force venv_cd to run in the new tab
 cd .
