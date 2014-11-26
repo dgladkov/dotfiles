@@ -42,6 +42,9 @@ set autoindent
 " always show status line
 set laststatus=2
 
+" backspace behavior
+set backspace=indent,eol,start
+
 " == color scheme ==============================================
 colorscheme molokai
 
