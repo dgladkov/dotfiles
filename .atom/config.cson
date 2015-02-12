@@ -1,29 +1,31 @@
-'global':
-  'exception-reporting':
-    'userId': 'ddd70832-24f6-8b0f-b18c-0e60b51f9a10'
-  'welcome':
-    'showOnStartup': false
-  'metrics':
-    'userId': 'a6d4afc7-05f9-4d7d-b805-d10c4e33bb64'
-  'editor':
-    'fontFamily': 'DejaVu Sans Mono'
-    'fontSize': 14
-    'showInvisibles': true
-    'tabLength': 4
-    'showIndentGuide': true
-    'invisibles': {}
-  'core':
-    'disabledPackages': [
-      'welcome'
+"*":
+  "exception-reporting":
+    userId: "ddd70832-24f6-8b0f-b18c-0e60b51f9a10"
+  welcome:
+    showOnStartup: false
+  metrics:
+    userId: "a6d4afc7-05f9-4d7d-b805-d10c4e33bb64"
+  editor:
+    fontFamily: "DejaVu Sans Mono"
+    fontSize: 14
+    showInvisibles: true
+    tabLength: 4
+    showIndentGuide: true
+    invisibles: {}
+  core:
+    disabledPackages: [
+      "welcome"
     ]
-    'themes': [
-      'atom-dark-ui'
-      'monokai'
+    themes: [
+      "atom-dark-ui"
+      "monokai"
     ]
-    'projectHome': '/home/dgl/Projects'
-  'linter-flake8':
-    'ignoreErrorCodes': [
-      'E501'
+    projectHome: "/home/dgl/Projects"
+  "linter-flake8":
+    ignoreErrorCodes: [
+      "E501"
+      "E128"
     ]
-  'tree-view':
-    'hideVcsIgnoredFiles': true
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  linter: {}
