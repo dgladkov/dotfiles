@@ -102,6 +102,9 @@ then
 elif [ -f "/usr/bin/virtualenvwrapper.sh" ]
 then
   source /usr/bin/virtualenvwrapper.sh
+elif [ -f "$HOME/.local/bin/virtualenvwrapper.sh" ]
+then
+  source "$HOME/.local/bin/virtualenvwrapper.sh"
 fi
 
 # ls coloring
