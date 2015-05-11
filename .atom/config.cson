@@ -7,17 +7,17 @@
     userId: "a6d4afc7-05f9-4d7d-b805-d10c4e33bb64"
   editor:
     fontFamily: "DejaVu Sans Mono"
-    fontSize: 14
     showInvisibles: true
     tabLength: 4
     showIndentGuide: true
     invisibles: {}
+    fontSize: 14
   core:
     disabledPackages: [
       "welcome"
     ]
     themes: [
-      "atom-dark-ui"
+      "one-dark-ui"
       "monokai"
     ]
     projectHome: "/home/dgl/Projects"
@@ -29,3 +29,13 @@
   "tree-view":
     hideVcsIgnoredFiles: true
   linter: {}
+  Zen:
+    width: 200
+  react: {}
+  "atom-beautify":
+    _analyticsUserId: "f25ebec3-d75d-4228-bea2-f692ddd4f374"
+  "django-templates":
+    defaultToDjangoTemplatesForFilePathsContaining: [
+      "Projects"
+    ]
+  "linter-jsxhint": {}
