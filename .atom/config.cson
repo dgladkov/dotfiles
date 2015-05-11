@@ -36,6 +36,6 @@
     _analyticsUserId: "f25ebec3-d75d-4228-bea2-f692ddd4f374"
   "django-templates":
     defaultToDjangoTemplatesForFilePathsContaining: [
-      "Projects"
+      "django"
     ]
   "linter-jsxhint": {}
