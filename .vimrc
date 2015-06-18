@@ -7,6 +7,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'chrisbra/csv.vim'
@@ -56,15 +57,12 @@ nnoremap <C-S-Tab> :bprevious<CR>
 " == NERDTree settings =========================================
 let g:NERDTreeShowHidden = 1
 
-" always show NERDTree
-autocmd VimEnter * if !argc() | NERDTree | endif
-autocmd BufEnter * NERDTreeMirror
-autocmd VimEnter * wincmd w
-
 " close vim if only NERDTree buffer is left
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-nmap <silent> <C-D> :NERDTreeToggle<CR>
+nmap <silent> <C-D> :NERDTreeTabsToggle<CR>
+
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_open_on_gui_startup=1
 
 " == vim-airline settings ======================================
 let g:airline#extensions#tabline#enabled = 1
