@@ -22,6 +22,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'elzr/vim-json'
+Plugin 'mxw/vim-jsx'
 
 call vundle#end()
 filetype plugin indent on
@@ -56,13 +57,7 @@ nnoremap <C-S-Tab> :bprevious<CR>
 
 " == NERDTree settings =========================================
 let g:NERDTreeShowHidden = 1
-
-" close vim if only NERDTree buffer is left
-
 nmap <silent> <C-D> :NERDTreeTabsToggle<CR>
-
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:nerdtree_tabs_open_on_gui_startup=1
 
 " == vim-airline settings ======================================
 let g:airline#extensions#tabline#enabled = 1
@@ -96,3 +91,6 @@ let g:vim_markdown_folding_disabled=1
 
 " == gundo settings ============================================
 nnoremap <F5> :GundoToggle<CR>
+
+" == JSX settigns ==============================================
+let g:jsx_ext_required = 0
