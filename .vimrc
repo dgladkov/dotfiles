@@ -22,6 +22,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'elzr/vim-json'
 Plugin 'mxw/vim-jsx'
 Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 filetype plugin indent on
