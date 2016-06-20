@@ -1,6 +1,6 @@
-#compdef gcc-config
+#compdef ansible-vault
 # ------------------------------------------------------------------------------
-# Copyright (c) 2011 Github zsh-users - http://github.com/zsh-users
+# Copyright (c) 2016 Github zsh-users - http://github.com/zsh-users
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,46 +28,62 @@
 # Description
 # -----------
 #
-#  Completion script for GCC config script (symlink manager for multiversioning).
+#  Completion script for ansible v1.9.2 (http://ansible.org)
 #
 # ------------------------------------------------------------------------------
 # Authors
 # -------
 #
-#  * Vadim A. Misbakh-Soloviov <mva@mva.name>
-#  * Bapt <bapt@tuxfamily.org>
-#  * kaworu <kaworu@kaworu.ch>
-#  * David Durrleman <dualmoo@gmail.com>
-#  * oberyno <oberyno@gmail.com>
-#  * Mamoru Komachi <usata@usata.org>
+#  * Rick van Hattem (https://github.com/wolph)
 #
 # ------------------------------------------------------------------------------
-#<sys-devel/gcc-config-0.0>
+#
 
-local arguments
-
-arguments=(
-	'(- :)'{--use-old,-O}'[use the old profile if one was selected]'
-	'(- :)'{--use-portage-chost,-P}'[only set profile if its CHOST matches /etc/{portage/}make.conf]:profiles:_gcc_profile'
-	'(- :)'{--get-current-profile,-c}'[print current used gcc profile]'
-	'(- :)'{--list-profiles,-l}'[print a list of available profiles]'
-	'(- :)'{--print-environ,-E}'[print environment of the given/current profile]:profiles:_gcc_profile'
-	'(- :)'{--get-bin-path,-B}'[print binary path of given/current profile]:profiles:_gcc_profile'
-	'(- :)'{--get-lib-path,-L}'[print library path of given/current profile]:profiles:_gcc_profile'
-	'(- :)'{--get-stdcxx-incdir,-X}'[print g++ include path of given/current profile]:profiles:_gcc_profile'
-	'(- :)'{--help,-h}'[show help]'
-	'(- :)'{--version,-v}'[show version info]'
-	'(- :):profiles:_gcc_profile'
-)
-
-_gcc_profile () {
-    local profile
-    profile=(${(f)"$(_call_program gcc-installed RC_NOCOLOR=yes gcc-config --list-profiles)"})
-    profile=${${profile/\[([^]]*)\]/}/\*}
-    _tags profile && { compadd "$@" -k profile || compadd "$@" ${(kv)=profile} }
+_ansible-vault-commands() {
+  local -a commands
+  
+  commands=(
+    'create:Create new encrypted file'
+    'decrypt:Decrypt encrypted file'
+    'edit:Edit encrypted file'
+    'encrypt:Encrypt unencrypted file'
+    'rekey:Change password for encrypted file'
+    'view:View encrypted file'
+  )
+  
+  _arguments -s : $nul_args && ret=0
+  _describe -t commands 'ansible-vault command' commands && ret=0
 }
 
-_arguments $arguments
+_ansible-vault-command(){
+  args=(
+    '--debug[enable debugging]' \
+    '--vault-password-file[vault password file]:password_file:_files'
+    $nul_args
+    "1::file_name:_files"
+  )
+  _arguments -s : $args && ret=0
+}
+
+_ansible-vault() {
+  local -a nul_args
+  nul_args=(
+    '(-h --help)'{-h,--help}'[show help message and exit.]'
+  )
+  
+  local curcontext=$curcontext ret=1
+  
+  if ((CURRENT == 2)); then
+    _ansible-vault-commands
+  else
+    shift words
+    (( CURRENT -- ))
+    curcontext="${curcontext%:*:*}:ansible-vault-$words[1]:"
+    _call_function ret _ansible-vault-command
+  fi
+}
+
+_ansible-vault "$@"
 
 # Local Variables:
 # mode: Shell-Script
