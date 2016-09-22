@@ -138,6 +138,32 @@ zstyle ':completion:*' cache-path ~/.zshcache
 # useful functions
 pygl () { pygmentize $1 | less -r }
 
+updateall() {
+    if [[ `uname -s` == "Darwin" ]]; then
+        echo 'Updating Homebrew...'
+        brew update && brew upgrade --cleanup
+    fi
+
+    runwithsudoifneeded() {
+        # $1: command, $2: dir path
+        local prefix=''
+        if [[ "`stat -c '%U' $2`" == "root" ]]; then
+            prefix='sudo '
+        fi
+        eval ${prefix}$1
+    }
+
+    if hash gem 2>/dev/null; then
+        echo 'Updating Ruby gems...'
+        runwithsudoifneeded "gem update --system && gem update" `gem env gemdir`
+    fi
+
+    if hash npm 2>/dev/null; then
+        echo 'Updating npm packages...'
+        runwithsudoifneeded "npm update -g" `npm root -g`
+    fi
+}
+
 cd () {
   has_virtualenv() {
     if [ -e .venv ]; then
@@ -203,8 +229,6 @@ alias shutdownwin="net rpc shutdown -I ipAddressOfWindowsPC -U username%password
 alias 'ps?'='ps ax | grep '
 alias coolwatch='watch -t -n1 "date +%T|figlet -f big"'
 alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v information_schema); do mysqldump5 $db | bzip2 > "$db.sql.bz2"; done'
-
-PATH=$PATH:$HOME/.local/bin:$HOME/.rvm/bin:$HOME/adt/sdk/platform-tools # Add RVM to PATH for scripting
 
 # trick to force venv_cd to run in the new tab
 cd .
