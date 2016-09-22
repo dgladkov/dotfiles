@@ -162,6 +162,8 @@ updateall() {
         echo 'Updating npm packages...'
         runwithsudoifneeded "npm update -g" `npm root -g`
     fi
+    
+    unset -f runwithsudoifneeded
 }
 
 cd () {
