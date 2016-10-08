@@ -146,10 +146,15 @@ updateall() {
 
     runwithsudoifneeded() {
         # $1: command, $2: dir path
+        cur_user=$(stat -c %U ${2} 2>/dev/null)
+        if [ $? != 0 ]; then
+            cur_user=$(stat -f %Su ${2} 2>/dev/null)
+        fi
         local prefix=''
-        if [[ "`stat -c '%U' $2`" == "root" ]]; then
+        if [[ $cur_user == "root" ]]; then
             prefix='sudo '
         fi
+        unset   cur_user
         eval ${prefix}$1
     }
 
