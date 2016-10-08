@@ -146,9 +146,9 @@ updateall() {
 
     runwithsudoifneeded() {
         # $1: command, $2: dir path
-        cur_user=$(stat -c %U ${2} 2>/dev/null)
+        cur_user=$(stat -c %U ${2} 2>/dev/null) # GNU
         if [ $? != 0 ]; then
-            cur_user=$(stat -f %Su ${2} 2>/dev/null)
+            cur_user=$(stat -f %Su ${2} 2>/dev/null) # BSD
         fi
         local prefix=''
         if [[ $cur_user == "root" ]]; then
