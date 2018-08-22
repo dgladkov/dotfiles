@@ -40,7 +40,7 @@
 # ------------------------------------------------------------------------------
 #
 # Needs either ANSIBLE_HOSTS or /etc/ansible/hosts on linux
-# (or /usr/local/etc/ansible/hosts on OSX)
+# (or /usr/local/etc/ansible/hosts on macOS)
 #
 # Note 1: the following gist (https://gist.github.com/15ed54a438a36d67fd99.git)
 # has some files to help improve the hostfile shell parsing
@@ -61,6 +61,7 @@ __host_file_location () {
   [[ "$OSTYPE" == darwin* ]] && FALLBACK="/usr/local/etc/ansible/hosts"
   [[ "$OSTYPE" == linux* ]] && FALLBACK="/etc/ansible/hosts"
   HOST_FILE=${ANSIBLE_HOSTS:=${FALLBACK}}
+  [[ -f ${HOST_FILE} ]] || HOST_FILE="$PWD/ansible/inventory/hosts"
   [[ -f ${HOST_FILE} ]] || HOST_FILE=/dev/null
 
   echo ${HOST_FILE}
@@ -126,7 +127,7 @@ _ansible-playbook ()
   typeset -A opt_args
 
   _arguments -C -W \
-    "1:playbook yml file:_files -g '*.yml'"\
+    "1:playbook yml file:_files -g '*.yml|*.yaml'"\
     '--ask-become-pass[ask for privilege escalation password]'\
     "(-k --ask-pass)"{-k,--ask-pass}"[ask for connection password]"\
     '--ask-su-pass[ask for su password (deprecated, use become)]'\

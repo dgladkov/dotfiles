@@ -1,45 +1,44 @@
-#!/bin/zsh
+# Disable XON/XOFF
+stty -ixon
 
-#disable control flow (scroll lock) signals
-stty -ixon -ixoff
+# Locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
-# my favorite apps to use
-export EDITOR='vim'
-case `uname -s` in
-  Darwin)
-    export BROWSER='open'
-    ;;
-  Linux)
-    export BROWSER='chromium-browser'
-    ;;
-esac
+export TERM=xterm-256color
 
-# completion
+# GNU and BSD (macOS) ls flags aren't compatible
+ls --version &>/dev/null
+if [ $? -eq 0 ]; then
+  alias ls="ls --color"
+else
+  alias ls="ls -G"
+fi
+
+# Completion
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit
 compinit
 
-autoload -U select-word-style
-select-word-style normal
-
-# correction
+# Correction
 setopt correct
 
-# misc improvements
+# Change directory without cd
 setopt autocd
-# setopt extendedglob - this interferes with git REFNAME^, disabled for now
 
-#history
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt share_history
+# History
 setopt append_history
+setopt extended_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
 setopt hist_reduce_blanks
+setopt share_history
 export HISTSIZE=2000
 export HISTFILE="$HOME/.history"
 export SAVEHIST=$HISTSIZE
 
-# my prompt
+# Prompt
 autoload -Uz vcs_info
 
 precmd() {
@@ -58,7 +57,6 @@ bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
-bindkey '^J' accept-line
 
 # list all possible keycodes for different terms
 bindkey "\e[1;5A" up-history
@@ -85,15 +83,9 @@ bindkey ";5D" vi-backward-word
 zstyle ':completion:*:descriptions' format '%U%d%u'
 zstyle ':completion:*:warnings' format 'Sorry, no matches for: %B%d%b'
 
-# extenstions
-alias -s html=$BROWSER
-
 # virtualenv
-export VIRTUALENV_USE_DISTRIBUTE=true
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
-export DJANGO_DEFAULT_PROJECT_TEMPLATE=https://github.com/caktus/django-project-template/zipball/master
-export DJANGO_DEFAULT_PROJECT_TEMPLATE_EXTENSIONS=py,rst,md,mdown,markdown
 
 # activate virtualenwrapper if installed
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]
@@ -107,69 +99,13 @@ then
   source "$HOME/.local/bin/virtualenvwrapper.sh"
 fi
 
-# ls coloring
-export LSCOLORS=dxfxcxdxbxegedabagacad
-
-if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]
-    then
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-fi
-
-if ls --color > /dev/null 2>&1; then # GNU coreutils
-  alias ls='ls --color=auto'
-  alias grep="grep --color=auto"
-else # BSD coreutils
-  alias ls='ls -G'
-  alias grep='grep -G'
-fi
-
 # completing process IDs with menu selection
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*' force-list always
 
-# ignore completion functions for commands don't have
-zstyle ':completion:*:functions' ignored-patterns '_*'
-
 # completion cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
-
-# useful functions
-pygl () { pygmentize $1 | less -r }
-
-updateall() {
-    if [[ `uname -s` == "Darwin" ]]; then
-        echo 'Updating Homebrew...'
-        brew update && brew upgrade --cleanup
-    fi
-
-    runwithsudoifneeded() {
-        # $1: command, $2: dir path
-        cur_user=$(stat -c %U ${2} 2>/dev/null) # GNU
-        if [ $? != 0 ]; then
-            cur_user=$(stat -f %Su ${2} 2>/dev/null) # BSD
-        fi
-        local prefix=''
-        if [[ $cur_user == "root" ]]; then
-            prefix='sudo '
-        fi
-        unset   cur_user
-        eval ${prefix}$1
-    }
-
-    if hash gem 2>/dev/null; then
-        echo 'Updating Ruby gems...'
-        runwithsudoifneeded "gem update --system && gem update" `gem env gemdir`
-    fi
-
-    if hash npm 2>/dev/null; then
-        echo 'Updating npm packages...'
-        runwithsudoifneeded "npm update -g" `npm root -g`
-    fi
-    
-    unset -f runwithsudoifneeded
-}
 
 cd () {
   has_virtualenv() {
@@ -185,63 +121,20 @@ cd () {
   builtin cd "$@" && has_virtualenv
 }
 
-devmailserver () {
-  local HOST=${1:-"localhost:20025"}
-  echo "Starting development mail server at $HOST"
-  python -m smtpd -n -c DebuggingServer $HOST
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
 }
+compctl -K _pip_completion pip
+# pip zsh completion end
 
-# Tell the terminal about the working directory whenever it changes.
-if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]] && [[ -z "$INSIDE_EMACS" ]]; then
-  update_terminal_cwd() {
-        # Identify the directory using a "file:" scheme URL, including
-        # the host name to disambiguate local vs. remote paths.
-
-        # Percent-encode the pathname.
-        local URL_PATH=''
-        {
-            # Use LANG=C to process text byte-by-byte.
-            local i ch hexch LANG=C
-            for ((i = 1; i <= ${#PWD}; ++i)); do
-                ch="$PWD[i]"
-                if [[ "$ch" =~ [/._~A-Za-z0-9-] ]]; then
-                    URL_PATH+="$ch"
-                else
-                    hexch=$(printf "%02X" "'$ch")
-                    URL_PATH+="%$hexch"
-                fi
-            done
-        }
-
-        local PWD_URL="file://$HOST$URL_PATH"
-        #echo "$PWD_URL"        # testing
-        printf '\e]7;%s\a' "$PWD_URL"
-    }
-
-    # Register the function so it is called whenever the working
-    # directory changes.
-    autoload add-zsh-hook
-    add-zsh-hook precmd update_terminal_cwd
-
-    # Tell the terminal about the initial directory.
-    update_terminal_cwd
-fi
-
-# useful aliases
-alias sudo="sudo " # to make aliases work with sudo
-alias json="python -m json.tool"
-alias updick='/usr/bin/uptime | perl -ne "/(\d+) d/;print 8,q(=)x\$1,\"D\n\""'
-alias wgetr='wget --random-wait -r -p -e robots=off -U "Mozilla/6.0 (Windows NT 6.2; WOW64; rv:16.0.1) Gecko/20121011 Firefox/16.0.1"'
-alias shutdownwin="net rpc shutdown -I ipAddressOfWindowsPC -U username%password"
-alias 'ps?'='ps ax | grep '
-alias coolwatch='watch -t -n1 "date +%T|figlet -f big"'
-alias mysqldump_all='for db in $(mysql -BNe "show databases" | grep -v information_schema); do mysqldump5 $db | bzip2 > "$db.sql.bz2"; done'
+# to make aliases work with sudo
+alias sudo="sudo "
 
 # trick to force venv_cd to run in the new tab
 cd .
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
-TERM=xterm-256color

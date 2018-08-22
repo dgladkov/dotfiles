@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXCLUDES=(_pip)
+EXCLUDES=(django_bash_completion celery.zsh _gem)
 
 for f in .zsh/completions/*; do
     filename=`basename $f`
