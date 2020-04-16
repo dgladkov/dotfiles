@@ -83,22 +83,6 @@ bindkey ";5D" vi-backward-word
 zstyle ':completion:*:descriptions' format '%U%d%u'
 zstyle ':completion:*:warnings' format 'Sorry, no matches for: %B%d%b'
 
-# virtualenv
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-
-# activate virtualenwrapper if installed
-if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]
-then
-  source /usr/local/bin/virtualenvwrapper.sh
-elif [ -f "/usr/bin/virtualenvwrapper.sh" ]
-then
-  source /usr/bin/virtualenvwrapper.sh
-elif [ -f "$HOME/.local/bin/virtualenvwrapper.sh" ]
-then
-  source "$HOME/.local/bin/virtualenvwrapper.sh"
-fi
-
 # completing process IDs with menu selection
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*' force-list always
@@ -106,20 +90,6 @@ zstyle ':completion:*:kill:*' force-list always
 # completion cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
-
-cd () {
-  has_virtualenv() {
-    if [ -e .venv ]; then
-      local ENV_NAME=`cat .venv`
-      if [ "`basename \"$VIRTUAL_ENV\"`" != "$ENV_NAME" ]; then
-        workon "$ENV_NAME"
-      fi
-    elif [ -e .env/bin/activate ]; then
-      source .env/bin/activate
-    fi
-  }
-  builtin cd "$@" && has_virtualenv
-}
 
 # pip zsh completion start
 function _pip_completion {
@@ -136,5 +106,13 @@ compctl -K _pip_completion pip
 # to make aliases work with sudo
 alias sudo="sudo "
 
-# trick to force venv_cd to run in the new tab
-cd .
+eval "$(direnv hook zsh)"
+
+show_virtual_env() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    echo "($(basename $VIRTUAL_ENV)) "
+  fi
+}
+setopt PROMPT_SUBST
+PS1='$(show_virtual_env)'$PS1
+
